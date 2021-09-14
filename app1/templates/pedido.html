@@ -3,19 +3,19 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro de Contato</title>
+    <title>Cadastro de Pedido</title>
     {% bootstrap_css %}
 </head>
 <body>
     <div class="container">
-    <h1> Contato </h1>
+    <h1> Pedido </h1>
     {% bootstrap_messages %}
-    <form method="post" action="{% url 'contato' %}" class="form" autocomplete="off">
+    <form method="post" action="{% url 'pedido' %}" class="form" autocomplete="off">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
             <button type="submit" class="btn btn-primary">
-                Cadastrar Contato
+                Cadastrar Pedido
             </button>
         {% endbuttons %}
     </form>

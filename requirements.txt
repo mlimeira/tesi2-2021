@@ -3,7 +3,9 @@ beautifulsoup4==4.9.3
 bootstrap4==0.1.0
 Django==3.2.6
 django-bootstrap4==3.0.1
+django-stdimage==5.3.0
 importlib-metadata==2.1.1
+Pillow==8.3.2
 pytz==2021.1
 soupsieve==2.2.1
 sqlparse==0.4.1
