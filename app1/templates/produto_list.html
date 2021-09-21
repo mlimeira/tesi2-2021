@@ -1,0 +1,53 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  {% bootstrap_css %}
+</head>
+<body>
+
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Nome do Produto</th>
+    <th scope="col">Preço</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for produto in produtos %}
+  <tr>
+    <td scope="row">{{produto.id}}</td>
+    <td scope="row"><a href="#modal{{produto.id}}" data-toggle="modal" data-target="#modal{{produto.id}}">{{produto.nome}}</a></td>
+    <td scope="row">{{produto.preco}}</td>
+  </tr>
+
+  <div class="modal" tabindex="-1" id="modal{{produto.id}}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{produto.nome}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img src="{{produto.imagem.url}}" class="img-thumbnail"/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  </tbody>
+</table>
+
+
+
+{% bootstrap_javascript jquery='full' %}
+</body>
+</html>

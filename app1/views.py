@@ -1,7 +1,7 @@
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from app1.forms import ClienteModelForm, ContatoModelForm, ProdutoModelForm, PedidoModelForm
-
+from app1.models import Produto
 
 # Create your views here.
 def pagina_principal(request):
@@ -43,22 +43,29 @@ def cliente(request):
     return render(request, 'cliente.html', context)
 
 def produto(request):
-    if request.method == 'POST':
-        form = ProdutoModelForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Produto cadastrado com sucesso!')
-            form = ProdutoModelForm()
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = ProdutoModelForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Produto cadastrado com sucesso!')
+                form = ProdutoModelForm()
+            else:
+                messages.error(request, 'Produto não cadastrado!')
         else:
-            messages.error(request, 'Produto não cadastrado!')
+            form = ProdutoModelForm()
+        context = {
+            'form': form
+        }
+        return render(request, 'produto.html', context)
     else:
-        form = ProdutoModelForm()
+        return redirect('produto_list')
 
+def produto_list(request):
     context = {
-        'form': form
+        'produtos': Produto.objects.all()
     }
-    #linha alterada
-    return render(request, 'produto.html', context)
+    return render(request, 'produto_list.html', context)
 
 def pedido(request):
     if request.method == 'POST':

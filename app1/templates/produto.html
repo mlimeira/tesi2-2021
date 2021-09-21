@@ -8,14 +8,14 @@
 </head>
 <body>
     <div class="container">
-    <h1> Produto </h1>
+    <h1> Cadastro de Produto </h1>
     {% bootstrap_messages %}
     <form method="post" action="{% url 'produto' %}" class="form" autocomplete="off" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
             <button type="submit" class="btn btn-primary">
-                Cadastrar Cliente
+                Cadastrar Produto
             </button>
         {% endbuttons %}
     </form>
